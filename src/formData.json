@@ -1,0 +1,67 @@
+[
+  {
+    "page_label": "Form Application",
+    "fields": [
+      {
+        "id": "english_name",
+        "label": "Name",
+        "placeholder": "Enter name",
+        "type": "text",
+        "value": ""
+      },
+      {
+        "id": "email",
+        "label": "Email",
+        "placeholder": "Enter email",
+        "type": "text"
+      },
+      {
+        "id": "select",
+        "label": "Employment desired",
+        "value": "Part-Time",
+        "mandatory": "yes",
+        "options": [
+          {
+            "option_label": "Full-Time"
+          },
+          {
+            "option_label": "Part-Time"
+          }
+        ],
+        "type": "select"
+      },
+      {
+        "id": "contact",
+        "label": "Contact No.",
+        "placeholder": "Enter contact no.",
+        "type": "number"
+      },
+      {
+        "id": "check",
+        "label": "I agree...",
+        "type": "checkbox",
+        "value": "checked"
+      },
+      {
+        "id": "date",
+        "label": "Pick up a Date",
+        "type": "date",
+        "format":"MMM/dd/yyyy",
+        "value": ""
+      },
+      {
+        "id": "radio",
+        "type": "radio",
+        "value": "",
+        "values": [
+          {
+            "val": "Female"
+          },
+          {
+            "val": "Male"
+          }
+        ]
+      }
+    ]
+  }
+]
