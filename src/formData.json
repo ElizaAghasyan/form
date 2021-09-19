@@ -52,6 +52,7 @@
       {
         "id": "radio",
         "type": "radio",
+        "label": "Gender",
         "value": "",
         "values": [
           {
@@ -61,6 +62,11 @@
             "val": "Male"
           }
         ]
+      },
+      {
+        "id": "button",
+        "type": "submit",
+        "text": "Submit"
       }
     ]
   }
