@@ -1,7 +1,10 @@
 import { TextField } from '@material-ui/core';
+import React, { useContext } from 'react'
+import { FormContext } from '../../FormContext';
 
 const Input = (props) => {
-    const { name, label, value,error=null, onChange } = props;
+    const { name, label, value, id } = props;
+    const { handleChange } = useContext(FormContext)
 
     return (
         <TextField
@@ -9,8 +12,7 @@ const Input = (props) => {
             label={label}
             name={name}
             value={value}
-            onChange={onChange}
-            {...(error && {error:true,helperText:error})}
+            onChange={event => handleChange(id, event)}
         />
     )
 }

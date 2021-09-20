@@ -1,27 +1,25 @@
-import { FormControl, FormControlLabel, Checkbox as MuiCheckbox } from '@material-ui/core';
+import { useState } from 'react';
+import Checkbox from '@mui/material/Checkbox';
 
-const Checkbox = (props) => {
-    const { name, label, value, onChange } = props;
+const MyCheckbox = (props) => {
+    const { label, id } = props;
+    const [checked, setChecked] = useState(false);
 
-    const convertToDefEventPara = (name, value) => ({
-        target: {
-            name, value
-        }
-    })
+    const handleChange = (event) => {
+        setChecked(event.target.checked);
+    };
 
     return (
-        <FormControl>
-            <FormControlLabel
-                control={<MuiCheckbox
-                    name={name}
-                    color="primary"
-                    checked={value}
-                    onChange={e => onChange(convertToDefEventPara(name, e.target.checked))}
-                />}
-                label={label}
+        <>
+            <label style={{'textAlign': 'center', 'marginTop':'10px'}}>{label}</label>
+            <Checkbox
+                id={id}
+                checked={checked}
+                onChange={handleChange}
+                inputProps={{ 'aria-label': 'controlled' }}
             />
-        </FormControl>
+        </>
     );
 }
 
-export default Checkbox;
+export default MyCheckbox;

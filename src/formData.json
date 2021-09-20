@@ -17,15 +17,23 @@
       },
       {
         "id": "select",
-        "label": "Employment desired",
-        "value": "Part-Time",
-        "mandatory": "yes",
+        "label": "Select",
+        "value": "Department",
         "options": [
           {
-            "option_label": "Full-Time"
+            "title": "Full-Time",
+            "value": "fullTime",
+            "id": 1
           },
           {
-            "option_label": "Part-Time"
+            "title": "Part-Time",
+            "value": "partTime",
+            "id": 2
+          },
+          {
+            "title": "Full",
+            "value": "part",
+            "id": 2
           }
         ],
         "type": "select"
@@ -38,7 +46,7 @@
       },
       {
         "id": "check",
-        "label": "I agree...",
+        "label": "I am not a robot",
         "type": "checkbox",
         "value": "checked"
       },
@@ -52,14 +60,21 @@
       {
         "id": "radio",
         "type": "radio",
-        "label": "Gender",
-        "value": "",
-        "values": [
+        "items": [
           {
-            "val": "Female"
+            "label": "Front-End",
+            "value": "Front-End",
+            "id": 1
           },
           {
-            "val": "Male"
+            "label": "Back-End",
+            "value": "Back-End",
+            "id": 2
+          },
+          {
+            "label": "Full Stack",
+            "value": "Full Stack",
+            "id": 3
           }
         ]
       },
