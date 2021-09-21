@@ -11,7 +11,7 @@ const MyCheckbox = (props) => {
 
     return (
         <>
-            <label style={{'textAlign': 'center', 'marginTop':'10px'}}>{label}</label>
+            <label style={{marginLeft: '10px'}}>{label}</label>
             <Checkbox
                 id={id}
                 checked={checked}

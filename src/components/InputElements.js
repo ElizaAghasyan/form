@@ -7,7 +7,6 @@ import CustomDateTimePicker from "./htmlForms/Date";
 
 
 const InputElements = ({ field: { type, id, label, items, format, placeholder, value, options, text, title }}) => {
-
     switch (type) {
         case 'text':
             return (<Input

@@ -1,18 +1,22 @@
-import {Paper, makeStyles, Button as MuiButton} from '@material-ui/core';
-import formData from './formData.json';
 import { useState, useEffect } from "react";
 import { FormContext } from './FormContext';
+import formData from './formData.json';
+import { Paper, makeStyles } from '@material-ui/core';
 import InputElements from "./components/InputElements";
 
+import './App.css';
+
 const useStyles = makeStyles(theme => ({
-   pageContent: {
-     margin: theme.spacing(10),
+    root: {
+        '& .MuiFormControl-root': {
+            width: '90%',
+            margin: theme.spacing(1),
+        }
+    },
+    pageContent: {
+     margin: theme.spacing(3),
      padding: theme.spacing(2),
-   },
-   muiForm: {
-     display: "flex",
-     flexWrap: "nowrap",
-     flexDirection: "column"
+     width: "600px",
    }
 }))
 
@@ -38,12 +42,12 @@ const App = () => {
    }
 
     return (
-      <FormContext.Provider value={{ handleChange, fields }}>
+      <FormContext.Provider value={{ handleChange, elements }}>
           <div className="App">
               <Paper className={classes.pageContent}>
                   <div className='container'>
                       <h2 className='page_label'>{page_label}</h2>
-                      <form className={classes.muiForm}>
+                      <form className={classes.root}>
                           {fields ? fields.map((field, i) =>
                                   <InputElements key={i} field={field} />)
                               :

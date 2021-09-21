@@ -1,18 +1,26 @@
 import { TextField } from '@material-ui/core';
-import React, { useContext } from 'react'
-import { FormContext } from '../../FormContext';
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles({
+    rootInput: {
+        width: '50%'
+    }
+})
 
 const Input = (props) => {
-    const { name, label, value, id } = props;
-    const { handleChange } = useContext(FormContext)
+    const [inputName, setInputName] = useState()
+    const { name, label, value } = props;
+    const classes = useStyles()
 
     return (
         <TextField
+            className={classes.rootInput}
             variant="outlined"
             label={label}
             name={name}
             value={value}
-            onChange={event => handleChange(id, event)}
+            onChange={e => setInputName(e.target.value)}
         />
     )
 }

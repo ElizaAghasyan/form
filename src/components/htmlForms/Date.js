@@ -1,27 +1,26 @@
 import * as React from 'react';
+import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import MobileDateTimePicker from '@mui/lab/MobileDateTimePicker';
+import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import Stack from '@mui/material/Stack';
-import {TextField} from "@material-ui/core";
 
-export default function CustomDateTimePicker(props) {
+export default function ResponsiveDatePickers() {
     const [value, setValue] = React.useState(new Date());
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <Stack spacing={3}>
-                <MobileDateTimePicker
+                <DesktopDatePicker
+                    label="For desktop"
+                    value={value}
+                    minDate={new Date('2017-01-01')}
                     onChange={(newValue) => {
                         setValue(newValue);
                     }}
-                    label={props.label}
-                    onError={console.log}
-                    minDate={new Date('2018-01-01T00:00')}
-                    inputFormat="yyyy/MM/dd hh:mm a"
-                    mask="___/__/__ __:__ _M"
                     renderInput={(params) => <TextField {...params} />}
                 />
+
             </Stack>
         </LocalizationProvider>
     );

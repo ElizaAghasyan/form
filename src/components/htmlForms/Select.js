@@ -1,21 +1,23 @@
 import { FormControl, InputLabel, Select as MuiSelect, MenuItem } from '@material-ui/core';
-import React, { useContext } from 'react'
-import { FormContext } from '../../FormContext';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
     styleSelect: {
-        '& .MuiSelect-root': {
-            paddingRight: "75px"
+        '& .MuiFormControl-root': {
+            width: '50%'
         }
     }
 }))
 
 const Select = (props) => {
     const { id, label, value, options } = props;
-    const { handleChange } = useContext(FormContext);
     const classes = useStyles();
+    const [age, setAge] = useState();
 
+    const handleChange = (event) => {
+        setAge(event.target.value);
+    };
 
     return (
         <FormControl variant="outlined">
@@ -27,10 +29,10 @@ const Select = (props) => {
                 value={value}
                 onSelect={handleChange}
             >
-                <MenuItem>{value}</MenuItem>
+                <MenuItem>None</MenuItem>
                 {
                     options.map(
-                        item => <MenuItem key={item.id} value={value} >{item.title}</MenuItem>
+                        item => <MenuItem key={item.id} value={item.value}>{item.title}</MenuItem>
                     )
                 }
             </MuiSelect>

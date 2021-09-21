@@ -4,7 +4,7 @@ import {FormContext} from "../../FormContext";
 
 const useStyles = makeStyles(theme => ({
     root: {
-        margin: theme.spacing(0.5)
+        margin: theme.spacing(1)
     },
     label: {
         textTransform: 'none'
@@ -13,11 +13,11 @@ const useStyles = makeStyles(theme => ({
 
 const Button = (props) => {
     const classes = useStyles();
-    const { fields } = useContext(FormContext)
+    const { elements } = useContext(FormContext)
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        alert(JSON.stringify(fields))
+        alert(JSON.stringify(elements))
     }
 
     return (

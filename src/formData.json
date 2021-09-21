@@ -6,8 +6,7 @@
         "id": "english_name",
         "label": "Name",
         "placeholder": "Enter name",
-        "type": "text",
-        "value": ""
+        "type": "text"
       },
       {
         "id": "email",
@@ -16,9 +15,15 @@
         "type": "text"
       },
       {
+        "id": "contact",
+        "label": "Contact No.",
+        "placeholder": "Enter contact no.",
+        "type": "number"
+      },
+      {
         "id": "select",
+        "type": "select",
         "label": "Select",
-        "value": "Department",
         "options": [
           {
             "title": "Full-Time",
@@ -35,20 +40,7 @@
             "value": "part",
             "id": 2
           }
-        ],
-        "type": "select"
-      },
-      {
-        "id": "contact",
-        "label": "Contact No.",
-        "placeholder": "Enter contact no.",
-        "type": "number"
-      },
-      {
-        "id": "check",
-        "label": "I am not a robot",
-        "type": "checkbox",
-        "value": "checked"
+        ]
       },
       {
         "id": "date",
@@ -56,6 +48,12 @@
         "type": "date",
         "format":"MMM/dd/yyyy",
         "value": ""
+      },
+      {
+        "id": "check",
+        "label": "I am not a robot",
+        "type": "checkbox",
+        "value": "checked"
       },
       {
         "id": "radio",
