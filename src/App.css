@@ -1,7 +1,24 @@
-.App {
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+    padding: 5px;
+    box-sizing: border-box;
     display: flex;
+    align-items: center;
     justify-content: center;
 }
+
+.form-wrapper {
+    width: 40%;
+    min-width: 600px;
+    background: white;
+    border-radius: 5px;
+    padding: 0 10px 60px;
+    position: relative;
+    box-shadow: 0 6px 17px 0 #d1d2e7;
+}
+
 h2 {
-    color: #081644
+    color: #081644;
+    margin: 10px 0 0;
 }

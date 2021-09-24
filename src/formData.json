@@ -1,86 +1,69 @@
-[
-  {
-    "page_label": "Form Application",
-    "fields": [
-      {
-        "id": "english_name",
-        "label": "Name",
-        "placeholder": "Enter name",
-        "type": "text"
-      },
-      {
-        "id": "email",
-        "label": "Email",
-        "placeholder": "Enter email",
-        "type": "text"
-      },
-      {
-        "id": "contact",
-        "label": "Contact No.",
-        "placeholder": "Enter contact no.",
-        "type": "number"
-      },
-      {
-        "id": "select",
-        "type": "select",
-        "label": "Select",
-        "options": [
-          {
-            "title": "Full-Time",
-            "value": "fullTime",
-            "id": 1
-          },
-          {
-            "title": "Part-Time",
-            "value": "partTime",
-            "id": 2
-          },
-          {
-            "title": "Full",
-            "value": "part",
-            "id": 2
-          }
-        ]
-      },
-      {
-        "id": "date",
-        "label": "Pick up a Date",
-        "type": "date",
-        "format":"MMM/dd/yyyy",
-        "value": ""
-      },
-      {
-        "id": "check",
-        "label": "I am not a robot",
-        "type": "checkbox",
-        "value": "checked"
-      },
-      {
-        "id": "radio",
-        "type": "radio",
-        "items": [
-          {
-            "label": "Front-End",
-            "value": "Front-End",
-            "id": 1
-          },
-          {
-            "label": "Back-End",
-            "value": "Back-End",
-            "id": 2
-          },
-          {
-            "label": "Full Stack",
-            "value": "Full Stack",
-            "id": 3
-          }
-        ]
-      },
-      {
-        "id": "button",
-        "type": "submit",
-        "text": "Submit"
-      }
-    ]
-  }
-]
+{
+  "formTitle": "Form",
+  "submitText": "Submit",
+  "fields": [
+    {
+      "field": "name",
+      "label": "Name",
+      "type": "text"
+    },
+    {
+      "field": "email",
+      "label": "Email",
+      "type": "text"
+    },
+    {
+      "field": "contact",
+      "label": "Contact No.",
+      "type": "number"
+    },
+    {
+      "field": "select",
+      "type": "select",
+      "label": "Select",
+      "options": [
+        {
+          "title": "Full-Time",
+          "value": "fullTime",
+          "id": 1
+        },
+        {
+          "title": "Part-Time",
+          "value": "partTime",
+          "id": 2
+        },
+        {
+          "title": "Full",
+          "value": "part",
+          "id": 3
+        }
+      ]
+    },
+    {
+      "field": "radio",
+      "type": "radio",
+      "items": [
+        {
+          "label": "Front-End",
+          "value": "Front-End",
+          "id": 1
+        },
+        {
+          "label": "Back-End",
+          "value": "Back-End",
+          "id": 2
+        },
+        {
+          "label": "Full Stack",
+          "value": "Full Stack",
+          "id": 3
+        }
+      ]
+    },
+    {
+      "field": "checked",
+      "label": "Confirm",
+      "type": "checkbox"
+    }
+  ]
+}

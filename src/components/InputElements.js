@@ -1,71 +1,108 @@
-import Input from './htmlForms/Input';
-import Button from  './htmlForms/Button';
-import Checkbox from './htmlForms/Checkbox';
-import RadioGroup from "./htmlForms/RadioGroup";
-import Select from "./htmlForms/Select";
-import CustomDateTimePicker from "./htmlForms/Date";
+import {
+    FormControl, FormControlLabel,
+    FormLabel,
+    InputLabel,
+    MenuItem, Radio,
+    RadioGroup as MuiRadioGroup,
+    Select as MuiSelect,
+    TextField
+} from "@material-ui/core";
+import Checkbox from "@mui/material/Checkbox";
+import { makeStyles } from '@material-ui/core'
 
+const useStyles = makeStyles(() => ({
+    radio: {
+        '&$checked': {
+            color: '#1976d2'
+        }
+    },
+    checked: {}
+}))
 
-const InputElements = ({ field: { type, id, label, items, format, placeholder, value, options, text, title }}) => {
+const InputElements = ({ field: { type, field, label, items, value, options }, setFieldValue}) => {
+    const classes = useStyles()
     switch (type) {
         case 'text':
-            return (<Input
-                id={id}
-                label={label}
-                placeholder={placeholder}
-                value={value}
-            />)
-        case 'select':
-            return (<Select
-                id={id}
-                label={label}
-                placeholder={placeholder}
-                value={value}
-                options={options}
-                title={title}
-            />)
-        case 'date':
-            return(<CustomDateTimePicker
-                id={id}
-                label={label}
-                format={format}
-                value={value}
-            />)
-        case 'checkbox':
-            return (<Checkbox
-                id={id}
-                label={label}
-                value={value}
-            />)
-        case 'radioGroup':
             return (
-                <RadioGroup
-                    id={id}
+                <TextField
+                    variant="outlined"
                     label={label}
+                    name={field}
                     value={value}
-                />)
-        case 'submit':
-            return(<Button
-                id={id}
-                text={text}
+                    onChange={(e) => {
+                        setFieldValue(field, e.target.value);
+                    }}
                 />)
         case 'number':
-            return(<Input
-                id={id}
-                placeholder={placeholder}
-                label={label}
-            />)
+            return (
+                <TextField
+                    variant="outlined"
+                    label={label}
+                    name={field}
+                    value={value}
+                    onChange={(e) => {
+                        setFieldValue(field, e.target.value);
+                    }}
+                />
+            )
+        case 'select':
+            return (
+                <FormControl variant="outlined">
+                    <InputLabel>{label}</InputLabel>
+                    <MuiSelect
+                        label={label}
+                        value={value}
+                        onChange={(e) => {
+                            setFieldValue(field, e.target.value);
+                        }}
+                    >
+                        <MenuItem>None</MenuItem>
+                        {
+                            options.map(
+                                item => <MenuItem key={item.id} value={item.value}>{item.title}</MenuItem>
+                            )
+                        }
+                    </MuiSelect>
+                </FormControl>
+            )
+        case 'checkbox':
+            return (
+                <>
+                    <Checkbox
+                        style={{left: '-11px', paddingRight: '0px'}}
+                        onChange={(e) => {
+                            setFieldValue(field, e.target.checked);
+                        }}
+                        inputProps={{ 'aria-label': 'controlled' }}
+
+                    />
+                    <label style={{fontSize: '15px', marginLeft:'-4px'}}>{label}</label>
+                </>
+            )
         case 'radio':
-            return(<RadioGroup
-                id={id}
-                items={items}
-                label={label}
-                format={format}
-                value={value}
-            />)
+            return (
+                <FormControl>
+                    <FormLabel>{label}</FormLabel>
+                    <MuiRadioGroup
+                        value={value}
+                        onChange={(e) => {
+                            setFieldValue(field, e.target.value);
+                        }}
+                    >
+                        {
+                            items.map(
+                                item => (
+                                    <FormControlLabel key={item.id} value={item.value} control={<Radio classes={{root: classes.radio, checked: classes.checked}} />} label={item.value} />
+                                )
+                            )
+                        }
+                    </MuiRadioGroup>
+                </FormControl>
+            )
         default:
             return null;
     }
+
 }
 
 export default InputElements;

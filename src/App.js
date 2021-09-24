@@ -1,64 +1,72 @@
-import { useState, useEffect } from "react";
-import { FormContext } from './FormContext';
-import formData from './formData.json';
-import { Paper, makeStyles } from '@material-ui/core';
+import { useState } from "react";
+import FormData from './formData.json';
+import { Button as MuiButton, makeStyles } from '@material-ui/core';
 import InputElements from "./components/InputElements";
 
 import './App.css';
 
-const useStyles = makeStyles(theme => ({
-    root: {
+const useStyles = makeStyles(() => ({
+    inputsRoot: {
         '& .MuiFormControl-root': {
-            width: '90%',
-            margin: theme.spacing(1),
+            width: '100%',
+            margin: '10px 0'
+        },
+        '& .MuiOutlinedInput-input': {
+            padding: '9.5px'
+        },
+        '& .MuiInputLabel-outlined': {
+            lineHeight: '1px',
+            fontSize: '15px'
         }
     },
-    pageContent: {
-     margin: theme.spacing(3),
-     padding: theme.spacing(2),
-     width: "600px",
-   }
+    btnRoot: {
+        bottom: '10px',
+        right: '10px',
+        position: 'absolute',
+    },
+    btnLabel: {
+        textTransform: 'none'
+    }
 }))
 
 const App = () => {
-  const [elements, setElements] = useState()
-  const classes = useStyles();
+    const [formData] = useState(FormData);
+    const [formValue, setFormValue] = useState({});
+    // const [loading, setLoading] = useState(false);
+    const classes = useStyles();
 
-  useEffect(() => {
-    setElements(formData[0])
-  }, [])
+    const setFieldValue = (filed, value) => {
+        setFormValue({...formValue, [filed]: value})
+    }
 
-  const { fields, page_label } = elements ?? {}
-
-   const handleChange = (elementId, e) => {
-      const newElements = {...elements}
-       newElements.fields.forEach(field => {
-           const { id } = field;
-           if(elementId === id) {
-               field.value = e.target.value;
-           }
-           setElements(newElements);
-       })
-   }
+    const submitForm = () => {
+        alert(JSON.stringify(formValue));
+    }
 
     return (
-      <FormContext.Provider value={{ handleChange, elements }}>
-          <div className="App">
-              <Paper className={classes.pageContent}>
-                  <div className='container'>
-                      <h2 className='page_label'>{page_label}</h2>
-                      <form className={classes.root}>
-                          {fields ? fields.map((field, i) =>
-                                  <InputElements key={i} field={field} />)
-                              :
-                              null
-                          }
-                      </form>
-                  </div>
-              </Paper>
-          </div>
-      </FormContext.Provider>
-  );
+        <div className="wrapper">
+            <div className='form-wrapper'>
+                <h2 className='form-title'>{formData.formTitle}</h2>
+                <form className={classes.inputsRoot}>
+                    {formData.fields.map((field, i) => <InputElements
+                            setFieldValue={setFieldValue}
+                            key={i}
+                            field={field}
+                        />
+                    )}
+                    <MuiButton
+                        variant="contained"
+                        size="large"
+                        color="primary"
+                        classes={{root: classes.btnRoot, label: classes.btnLabel}}
+                        onClick={submitForm}
+                    >
+                        {formData.submitText}
+                    </MuiButton>
+                </form>
+            </div>
+        </div>
+    );
 }
 
 export default App;
