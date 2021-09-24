@@ -67,17 +67,15 @@ const InputElements = ({ field: { type, field, label, items, value, options }, s
             )
         case 'checkbox':
             return (
-                <>
+                <span style={{left: '-12px', position: 'relative'}} className='checkbox'>
                     <Checkbox
-                        style={{left: '-11px', paddingRight: '0px'}}
                         onChange={(e) => {
                             setFieldValue(field, e.target.checked);
                         }}
                         inputProps={{ 'aria-label': 'controlled' }}
-
                     />
-                    <label style={{fontSize: '15px', marginLeft:'-4px'}}>{label}</label>
-                </>
+                    <label>{label}</label>
+                </span>
             )
         case 'radio':
             return (

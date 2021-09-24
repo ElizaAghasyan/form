@@ -1,6 +1,6 @@
-import { useState } from "react";
+import {useState} from "react";
 import FormData from './formData.json';
-import { Button as MuiButton, makeStyles } from '@material-ui/core';
+import {Button as MuiButton, makeStyles} from '@material-ui/core';
 import InputElements from "./components/InputElements";
 
 import './App.css';
@@ -19,11 +19,6 @@ const useStyles = makeStyles(() => ({
             fontSize: '15px'
         }
     },
-    btnRoot: {
-        bottom: '10px',
-        right: '10px',
-        position: 'absolute',
-    },
     btnLabel: {
         textTransform: 'none'
     }
@@ -40,7 +35,7 @@ const App = () => {
     }
 
     const submitForm = () => {
-        alert(JSON.stringify(formValue));
+        console.log(formValue);
     }
 
     return (
@@ -48,21 +43,25 @@ const App = () => {
             <div className='form-wrapper'>
                 <h2 className='form-title'>{formData.formTitle}</h2>
                 <form className={classes.inputsRoot}>
-                    {formData.fields.map((field, i) => <InputElements
-                            setFieldValue={setFieldValue}
-                            key={i}
-                            field={field}
-                        />
-                    )}
-                    <MuiButton
-                        variant="contained"
-                        size="large"
-                        color="primary"
-                        classes={{root: classes.btnRoot, label: classes.btnLabel}}
-                        onClick={submitForm}
-                    >
-                        {formData.submitText}
-                    </MuiButton>
+                    <div className="form content">
+                        {formData.fields.map((field, i) => <InputElements
+                                setFieldValue={setFieldValue}
+                                key={i}
+                                field={field}
+                            />
+                        )}
+                    </div>
+                    <div className='btn-wrapper'>
+                        <MuiButton
+                            variant="contained"
+                            size="large"
+                            color="primary"
+                            classes={{label: classes.btnLabel}}
+                            onClick={submitForm}
+                        >
+                            {formData.submitText}
+                        </MuiButton>
+                    </div>
                 </form>
             </div>
         </div>

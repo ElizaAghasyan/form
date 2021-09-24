@@ -13,12 +13,17 @@
     min-width: 600px;
     background: white;
     border-radius: 5px;
-    padding: 0 10px 60px;
+    padding: 20px;
     position: relative;
     box-shadow: 0 6px 17px 0 #d1d2e7;
 }
 
+.btn-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
 h2 {
     color: #081644;
-    margin: 10px 0 0;
+    margin: 0;
 }
