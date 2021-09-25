@@ -40,6 +40,10 @@
       ]
     },
     {
+      "field": "date",
+      "type": "date"
+    },
+    {
       "field": "radio",
       "type": "radio",
       "items": [

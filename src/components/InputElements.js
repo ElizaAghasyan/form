@@ -8,7 +8,8 @@ import {
     TextField
 } from "@material-ui/core";
 import Checkbox from "@mui/material/Checkbox";
-import { makeStyles } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core';
+import BasicDatePicker from "./Date";
 
 const useStyles = makeStyles(() => ({
     radio: {
@@ -64,6 +65,13 @@ const InputElements = ({ field: { type, field, label, items, value, options }, s
                         }
                     </MuiSelect>
                 </FormControl>
+            )
+        case 'date':
+            return (
+                <BasicDatePicker
+                    field={field}
+                    onchange={setFieldValue}
+                />
             )
         case 'checkbox':
             return (
