@@ -8,24 +8,28 @@
         {
           "field": "name",
           "label": "Name",
-          "type": "text"
+          "type": "text",
+          "required": true,
+          "validationPattern": "^[a-zA-Z\\-]+$"
         },
         {
           "field": "email",
           "label": "Email",
           "type": "text",
-          "validationPattern": "^"
+          "required": true,
+          "validationPattern": "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"
         },
         {
           "field": "phone",
-          "label": "Phone Number",
+          "label": "phone number",
           "type": "number",
-          "validationPattern": "required"
+          "required": true
         },
         {
           "field": "select",
           "type": "select",
           "label": "Select",
+          "required": true,
           "options": [
             {
               "title": "Full-Time",
@@ -47,84 +51,13 @@
         {
           "field": "date",
           "type": "datePicker",
-          "label": "Birthday"
+          "label": "Birthday",
+          "required": true
         },
         {
           "field": "radio",
           "type": "radio",
-          "items": [
-            {
-              "label": "Front-End",
-              "value": "Front-End",
-              "id": 1
-            },
-            {
-              "label": "Back-End",
-              "value": "Back-End",
-              "id": 2
-            },
-            {
-              "label": "Full Stack",
-              "value": "Full Stack",
-              "id": 3
-            }
-          ]
-        },
-        {
-          "field": "checked",
-          "label": "Confirm",
-          "type": "checkbox"
-        }
-      ]
-    },
-    {
-      "formGroupTitle": "Group 2",
-      "fields": [
-        {
-          "field": "name",
-          "label": "Name",
-          "type": "text"
-        },
-        {
-          "field": "email",
-          "label": "Email",
-          "type": "text"
-        },
-        {
-          "field": "contact",
-          "label": "Phone Number",
-          "type": "number"
-        },
-        {
-          "field": "select",
-          "type": "select",
-          "label": "Select",
-          "options": [
-            {
-              "title": "Full-Time",
-              "value": "fullTime",
-              "id": 1
-            },
-            {
-              "title": "Part-Time",
-              "value": "partTime",
-              "id": 2
-            },
-            {
-              "title": "Full",
-              "value": "part",
-              "id": 3
-            }
-          ]
-        },
-        {
-          "field": "date",
-          "type": "datePicker",
-          "label": "Birthday"
-        },
-        {
-          "field": "radio",
-          "type": "radio",
+          "required": true,
           "items": [
             {
               "label": "Front-End",

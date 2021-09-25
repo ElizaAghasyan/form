@@ -25,16 +25,16 @@ const useStyles = makeStyles(() => ({
     checked: {}
 }))
 
-const InputElements = ({ field: { type, field, label, items, error=null, options }, setFieldValue}) => {
+const InputElements = ({ field, setFieldValue , error}) => {
     const classes = useStyles()
-    switch (type) {
+    switch (field.type) {
         case 'text':
             return (
                 <TextField
-                    error={false}
+                    error={error}
                     variant="outlined"
-                    label={label}
-                    name={field}
+                    label={field.label}
+                    name={field.field}
                     onChange={(e) => {
                         setFieldValue(field, e.target.value);
                     }}
@@ -45,8 +45,8 @@ const InputElements = ({ field: { type, field, label, items, error=null, options
                 <TextField
                     error={false}
                     variant="outlined"
-                    label={label}
-                    name={field}
+                    label={field.label}
+                    name={field.field}
                     onChange={(e) => {
                         setFieldValue(field, e.target.value);
                     }}
@@ -56,16 +56,16 @@ const InputElements = ({ field: { type, field, label, items, error=null, options
         case 'select':
             return (
                 <FormControl variant="outlined">
-                    <InputLabel>{label}</InputLabel>
+                    <InputLabel>{field.label}</InputLabel>
                     <MuiSelect
-                        label={label}
+                        label={field.label}
                         onChange={(e) => {
                             setFieldValue(field, e.target.value);
                         }}
                     >
                         <MenuItem>None</MenuItem>
                         {
-                            options.map(
+                            field.options.map(
                                 item => <MenuItem key={item.id} value={item.value}>{item.title}</MenuItem>
                             )
                         }
@@ -76,7 +76,6 @@ const InputElements = ({ field: { type, field, label, items, error=null, options
             return (
                 <BasicDatePicker
                     field={field}
-                    label={label}
                     onchange={setFieldValue}
                 />
             )
@@ -89,20 +88,20 @@ const InputElements = ({ field: { type, field, label, items, error=null, options
                         }}
                         inputProps={{'aria-label': 'controlled'}}
                     />
-                    <label>{label}</label>
+                    <label>{field.label}</label>
                 </span>
             )
         case 'radio':
             return (
                 <FormControl>
-                    <FormLabel>{label}</FormLabel>
+                    <FormLabel>{field.label}</FormLabel>
                     <MuiRadioGroup
                         onChange={(e) => {
                             setFieldValue(field, e.target.value);
                         }}
                     >
                         {
-                            items.map(
+                            field.items.map(
                                 item => (
                                     <FormControlLabel
                                         value={item.value}

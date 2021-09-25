@@ -27,14 +27,37 @@ const useStyles = makeStyles(() => ({
 const App = () => {
     const [formData] = useState(FormData);
     const [formValue, setFormValue] = useState({});
+    const [error, setError] = useState([]);
     // const [loading, setLoading] = useState(false);
     const classes = useStyles();
 
-    const setFieldValue = (filed, value) => {
-        setFormValue({...formValue, [filed]: value})
+    const setFieldValue = (field, value) => {
+        setFormValue({...formValue, [field.field]: value})
+        const regExp = field.validationPattern && new RegExp(field.validationPattern);
+        if ((field.required && !value) || (regExp && !regExp.test(value))) {
+            if (!error.includes(field.field)) {
+                setError([...error, field.field])
+            }
+            return
+        }
+        if (error.includes(field.field)) {
+            setError(error.filter(item => item !== field.field))
+        }
     }
 
     const submitForm = () => {
+        let errorRequired = error;
+        formData.formRows.forEach((inputs) => {
+            inputs.fields.forEach(input => {
+                if (input.required && !formValue[input.field] && !errorRequired.includes(input.field)) {
+                    errorRequired.push(input.field);
+                }
+            })
+        })
+        setError([...errorRequired]);
+        if (errorRequired.length) {
+            return
+        }
         console.log(formValue);
     }
 
@@ -53,6 +76,7 @@ const App = () => {
                                         setFieldValue={setFieldValue}
                                         key={j}
                                         field={field}
+                                        error={error.includes(field.field)}
                                     />
                                 )}
                             </div>
@@ -64,6 +88,7 @@ const App = () => {
                             size="large"
                             color="primary"
                             classes={{label: classes.btnLabel}}
+                            disabled={!!error.length || Object.keys(formValue).length === 0}
                             onClick={submitForm}
                         >
                             {formData.submitText}
