@@ -1,73 +1,154 @@
 {
   "formTitle": "Form",
   "submitText": "Submit",
-  "fields": [
+  "formRows": [
     {
-      "field": "name",
-      "label": "Name",
-      "type": "text"
-    },
-    {
-      "field": "email",
-      "label": "Email",
-      "type": "text"
-    },
-    {
-      "field": "contact",
-      "label": "Contact No.",
-      "type": "number"
-    },
-    {
-      "field": "select",
-      "type": "select",
-      "label": "Select",
-      "options": [
+      "formGroupTitle": "Group 1",
+      "fields": [
         {
-          "title": "Full-Time",
-          "value": "fullTime",
-          "id": 1
+          "field": "name",
+          "label": "Name",
+          "type": "text"
         },
         {
-          "title": "Part-Time",
-          "value": "partTime",
-          "id": 2
+          "field": "email",
+          "label": "Email",
+          "type": "text",
+          "validationPattern": "^"
         },
         {
-          "title": "Full",
-          "value": "part",
-          "id": 3
+          "field": "phone",
+          "label": "phone number",
+          "type": "number",
+          "validationPattern": "required"
+        },
+        {
+          "field": "select",
+          "type": "select",
+          "label": "Select",
+          "options": [
+            {
+              "title": "Full-Time",
+              "value": "fullTime",
+              "id": 1
+            },
+            {
+              "title": "Part-Time",
+              "value": "partTime",
+              "id": 2
+            },
+            {
+              "title": "Full",
+              "value": "part",
+              "id": 3
+            }
+          ]
+        },
+        {
+          "field": "date",
+          "type": "datePicker",
+          "label": "Birthday"
+        },
+        {
+          "field": "radio",
+          "type": "radio",
+          "items": [
+            {
+              "label": "Front-End",
+              "value": "Front-End",
+              "id": 1
+            },
+            {
+              "label": "Back-End",
+              "value": "Back-End",
+              "id": 2
+            },
+            {
+              "label": "Full Stack",
+              "value": "Full Stack",
+              "id": 3
+            }
+          ]
+        },
+        {
+          "field": "checked",
+          "label": "Confirm",
+          "type": "checkbox"
         }
       ]
     },
     {
-      "field": "date",
-      "type": "date"
-    },
-    {
-      "field": "radio",
-      "type": "radio",
-      "items": [
+      "formGroupTitle": "Group 2",
+      "fields": [
         {
-          "label": "Front-End",
-          "value": "Front-End",
-          "id": 1
+          "field": "name",
+          "label": "Name",
+          "type": "text"
         },
         {
-          "label": "Back-End",
-          "value": "Back-End",
-          "id": 2
+          "field": "email",
+          "label": "Email",
+          "type": "text"
         },
         {
-          "label": "Full Stack",
-          "value": "Full Stack",
-          "id": 3
+          "field": "contact",
+          "label": "Contact No.",
+          "type": "number"
+        },
+        {
+          "field": "select",
+          "type": "select",
+          "label": "Select",
+          "options": [
+            {
+              "title": "Full-Time",
+              "value": "fullTime",
+              "id": 1
+            },
+            {
+              "title": "Part-Time",
+              "value": "partTime",
+              "id": 2
+            },
+            {
+              "title": "Full",
+              "value": "part",
+              "id": 3
+            }
+          ]
+        },
+        {
+          "field": "date",
+          "type": "datePicker",
+          "label": "Birthday"
+        },
+        {
+          "field": "radio",
+          "type": "radio",
+          "items": [
+            {
+              "label": "Front-End",
+              "value": "Front-End",
+              "id": 1
+            },
+            {
+              "label": "Back-End",
+              "value": "Back-End",
+              "id": 2
+            },
+            {
+              "label": "Full Stack",
+              "value": "Full Stack",
+              "id": 3
+            }
+          ]
+        },
+        {
+          "field": "checked",
+          "label": "Confirm",
+          "type": "checkbox"
         }
       ]
-    },
-    {
-      "field": "checked",
-      "label": "Confirm",
-      "type": "checkbox"
     }
   ]
 }

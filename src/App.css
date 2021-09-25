@@ -1,7 +1,7 @@
 .wrapper {
     width: 100vw;
     height: 100vh;
-    padding: 5px;
+    padding: 30px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -16,12 +16,28 @@
     padding: 20px;
     position: relative;
     box-shadow: 0 6px 17px 0 #d1d2e7;
+    max-height: calc(100% - 44px);
+    overflow: auto;
 }
 
 .btn-wrapper {
     display: flex;
     justify-content: flex-end;
 }
+
+.form-group {
+    padding: 0 10px;
+}
+
+.form-group h4 {
+    margin: 7px 0;
+    padding: 0 10px;
+}
+
+.form-group .form-content {
+    padding: 0 10px;
+}
+
 
 h2 {
     color: #081644;

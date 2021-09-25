@@ -43,14 +43,21 @@ const App = () => {
             <div className='form-wrapper'>
                 <h2 className='form-title'>{formData.formTitle}</h2>
                 <form className={classes.inputsRoot}>
-                    <div className="form content">
-                        {formData.fields.map((field, i) => <InputElements
-                                setFieldValue={setFieldValue}
-                                key={i}
-                                field={field}
-                            />
-                        )}
-                    </div>
+                    {formData.formRows.map((row, i) => (
+                        <div key={i} className="form-group">
+                            <h4>
+                                {row.formGroupTitle}
+                            </h4>
+                            <div className="form-content">
+                                {row.fields.map((field, j) => <InputElements
+                                        setFieldValue={setFieldValue}
+                                        key={j}
+                                        field={field}
+                                    />
+                                )}
+                            </div>
+                        </div>
+                    ))}
                     <div className='btn-wrapper'>
                         <MuiButton
                             variant="contained"
