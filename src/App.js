@@ -15,8 +15,8 @@ const useStyles = makeStyles(() => ({
             padding: '9.5px'
         },
         '& .MuiInputLabel-outlined': {
-            lineHeight: '1px',
-            fontSize: '15px'
+            fontSize: '15px',
+            margin: '-6px 0'
         }
     },
     btnLabel: {

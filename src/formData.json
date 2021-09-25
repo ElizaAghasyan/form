@@ -18,7 +18,7 @@
         },
         {
           "field": "phone",
-          "label": "phone number",
+          "label": "Phone Number",
           "type": "number",
           "validationPattern": "required"
         },
@@ -92,7 +92,7 @@
         },
         {
           "field": "contact",
-          "label": "Contact No.",
+          "label": "Phone Number",
           "type": "number"
         },
         {

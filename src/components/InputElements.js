@@ -17,31 +17,40 @@ const useStyles = makeStyles(() => ({
             color: '#1976d2'
         }
     },
+    warningStyles: {
+        "& .MuiFormLabel-root.Mui-error": {
+            color: "red !important"
+        }
+    },
     checked: {}
 }))
 
-const InputElements = ({ field: { type, field, label, items, options }, setFieldValue}) => {
+const InputElements = ({ field: { type, field, label, items, error=null, options }, setFieldValue}) => {
     const classes = useStyles()
     switch (type) {
         case 'text':
             return (
                 <TextField
+                    error={false}
                     variant="outlined"
                     label={label}
                     name={field}
                     onChange={(e) => {
                         setFieldValue(field, e.target.value);
                     }}
+                    className={error ? classes.warningStyles : null}
                 />)
         case 'number':
             return (
                 <TextField
+                    error={false}
                     variant="outlined"
                     label={label}
                     name={field}
                     onChange={(e) => {
                         setFieldValue(field, e.target.value);
                     }}
+                    className={error ? classes.warningStyles : null}
                 />
             )
         case 'select':
