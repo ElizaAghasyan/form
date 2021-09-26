@@ -1,15 +1,18 @@
 import {
-    FormControl, FormControlLabel,
+    FormControl,
+    FormControlLabel,
     FormLabel,
     InputLabel,
-    MenuItem, Radio,
+    makeStyles,
+    MenuItem,
+    Radio,
     RadioGroup as MuiRadioGroup,
     Select as MuiSelect,
     TextField
 } from "@material-ui/core";
 import Checkbox from "@mui/material/Checkbox";
-import { makeStyles } from '@material-ui/core';
 import BasicDatePicker from "./Date";
+import Reaptcha from "reaptcha";
 
 const useStyles = makeStyles(() => ({
     radio: {
@@ -20,8 +23,8 @@ const useStyles = makeStyles(() => ({
     checked: {}
 }))
 
-const InputElements = ({ field, setFieldValue , error}) => {
-    const classes = useStyles()
+const InputElements = ({field, setFieldValue, error}) => {
+    const classes = useStyles();
     switch (field.type) {
         case 'text':
             return (
@@ -101,7 +104,7 @@ const InputElements = ({ field, setFieldValue , error}) => {
                                     <FormControlLabel
                                         value={item.value}
                                         key={item.id}
-                                        control={<Radio classes={{root: classes.radio, checked: classes.checked}} />}
+                                        control={<Radio classes={{root: classes.radio, checked: classes.checked}}/>}
                                         label={item.label}
                                     />
                                 )
@@ -109,6 +112,13 @@ const InputElements = ({ field, setFieldValue , error}) => {
                         }
                     </MuiRadioGroup>
                 </FormControl>
+            )
+        case 'recaptcha':
+            return (
+                <Reaptcha sitekey={field.siteKey} onVerify={(e) => {
+                    setFieldValue(field, e.target.value);
+                }}
+                />
             )
         default:
             return null;

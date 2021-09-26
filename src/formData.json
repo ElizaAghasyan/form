@@ -1,6 +1,7 @@
 {
   "formTitle": "Form",
   "submitText": "Submit",
+  "endpoint": "baseUrl/endPoint",
   "formRows": [
     {
       "formGroupTitle": "Group 1",
@@ -80,6 +81,18 @@
           "field": "checked",
           "label": "Confirm",
           "type": "checkbox"
+        }
+      ]
+    },
+    {
+      "formGroupTitle": "Google recaptcha",
+      "fields": [
+        {
+          "field": "recaptcha",
+          "siteKey": "6LdjWZAcAAAAAGQK-5UDqfgr2V3GxQC8kw1LDQfk",
+          "type": "recaptcha",
+          "label": "recaptcha",
+          "required": true
         }
       ]
     }

@@ -2,7 +2,6 @@ import {useState} from "react";
 import FormData from './formData.json';
 import {Button as MuiButton, makeStyles} from '@material-ui/core';
 import InputElements from "./components/InputElements";
-
 import './App.css';
 
 const useStyles = makeStyles(() => ({
@@ -43,6 +42,20 @@ const App = () => {
         if (error.includes(field.field)) {
             setError(error.filter(item => item !== field.field))
         }
+
+        fetch(formData.endpoint, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(formValue),
+            credentials: 'include',
+        }).then(() => {
+            setFormValue({});
+        })
+        //     .catch(() => {
+        //     setLoading(false);
+        // });
     }
 
     const submitForm = () => {
