@@ -23,12 +23,13 @@ const useStyles = makeStyles(() => ({
     checked: {}
 }))
 
-const InputElements = ({field, setFieldValue, error}) => {
+const InputElements = ({field, setFieldValue, error, formValue}) => {
     const classes = useStyles();
     switch (field.type) {
         case 'text':
             return (
                 <TextField
+                    value={formValue[field.field]}
                     error={error}
                     variant="outlined"
                     label={field.label}
@@ -40,6 +41,7 @@ const InputElements = ({field, setFieldValue, error}) => {
         case 'number':
             return (
                 <TextField
+                    value={formValue[field.field]}
                     error={error}
                     variant="outlined"
                     label={field.label}
@@ -54,6 +56,7 @@ const InputElements = ({field, setFieldValue, error}) => {
                 <FormControl variant="outlined">
                     <InputLabel>{field.label}</InputLabel>
                     <MuiSelect
+                        value={formValue[field.field]}
                         error={error}
                         label={field.label}
                         onChange={(e) => {
@@ -75,6 +78,7 @@ const InputElements = ({field, setFieldValue, error}) => {
                     field={field}
                     onchange={setFieldValue}
                     error={error}
+                    formValue={formValue}
                 />
             )
         case 'checkbox':
@@ -115,8 +119,8 @@ const InputElements = ({field, setFieldValue, error}) => {
             )
         case 'recaptcha':
             return (
-                <Reaptcha sitekey={field.siteKey} onVerify={(e) => {
-                    setFieldValue(field, e.target.value);
+                <Reaptcha sitekey={field.siteKey} onVerify={(value) => {
+                    setFieldValue(field, value);
                 }}
                 />
             )

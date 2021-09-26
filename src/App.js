@@ -25,22 +25,40 @@ const useStyles = makeStyles(() => ({
 
 const App = () => {
     const [formData] = useState(FormData);
-    const [formValue, setFormValue] = useState({});
+    const initialFormValue = {};
+    formData.formRows.forEach((inputs) => {
+        inputs.fields.forEach((input) => {
+            initialFormValue[input.field] = '';
+        })
+    })
+    const [formValue, setFormValue] = useState(initialFormValue);
     const [error, setError] = useState([]);
     // const [loading, setLoading] = useState(false);
     const classes = useStyles();
 
     const setFieldValue = (field, value) => {
         setFormValue({...formValue, [field.field]: value})
-        const regExp = field.validationPattern && new RegExp(field.validationPattern);
-        if ((field.required && !value) || (regExp && !regExp.test(value))) {
-            if (!error.includes(field.field)) {
-                setError([...error, field.field])
-            }
+    }
+
+    const submitForm = () => {
+        let errorRequired = error;
+        formData.formRows.forEach((inputs) => {
+            inputs.fields.forEach(input => {
+                const regExp = input.validationPattern && new RegExp(input.validationPattern);
+                const value = formValue[input.field];
+                if ((input.required && !value) || (regExp && !regExp.test(value))) {
+                    if (!errorRequired.includes(input.field)) {
+                        errorRequired.push(input.field);
+                    }
+                } else if(errorRequired.includes(input.field)) {
+                    errorRequired = errorRequired.filter(item => item !== input.field)
+                }
+            })
+        })
+
+        setError([...errorRequired]);
+        if (errorRequired.length) {
             return
-        }
-        if (error.includes(field.field)) {
-            setError(error.filter(item => item !== field.field))
         }
 
         fetch(formData.endpoint, {
@@ -51,27 +69,11 @@ const App = () => {
             body: JSON.stringify(formValue),
             credentials: 'include',
         }).then(() => {
-            setFormValue({});
+            // setFormValue({});
         })
         //     .catch(() => {
         //     setLoading(false);
         // });
-    }
-
-    const submitForm = () => {
-        let errorRequired = error;
-        formData.formRows.forEach((inputs) => {
-            inputs.fields.forEach(input => {
-                if (input.required && !formValue[input.field] && !errorRequired.includes(input.field)) {
-                    errorRequired.push(input.field);
-                }
-            })
-        })
-        setError([...errorRequired]);
-        if (errorRequired.length) {
-            return
-        }
-        console.log(formValue);
     }
 
     return (
@@ -86,6 +88,7 @@ const App = () => {
                             </h4>
                             <div className="form-content">
                                 {row.fields.map((field, j) => <InputElements
+                                        formValue={formValue}
                                         setFieldValue={setFieldValue}
                                         key={j}
                                         field={field}
@@ -101,7 +104,6 @@ const App = () => {
                             size="large"
                             color="primary"
                             classes={{label: classes.btnLabel}}
-                            disabled={!!error.length || Object.keys(formValue).length === 0}
                             onClick={submitForm}
                         >
                             {formData.submitText}
