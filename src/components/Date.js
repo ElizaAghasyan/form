@@ -5,7 +5,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 
 export default function BasicDatePicker(props) {
-    const { onchange, field } = props;
+    const { onchange, field, error } = props;
     const [value, setValue] = React.useState(null);
 
     return (

@@ -17,11 +17,6 @@ const useStyles = makeStyles(() => ({
             color: '#1976d2'
         }
     },
-    warningStyles: {
-        "& .MuiFormLabel-root.Mui-error": {
-            color: "red !important"
-        }
-    },
     checked: {}
 }))
 
@@ -38,19 +33,17 @@ const InputElements = ({ field, setFieldValue , error}) => {
                     onChange={(e) => {
                         setFieldValue(field, e.target.value);
                     }}
-                    className={error ? classes.warningStyles : null}
                 />)
         case 'number':
             return (
                 <TextField
-                    error={false}
+                    error={error}
                     variant="outlined"
                     label={field.label}
                     name={field.field}
                     onChange={(e) => {
                         setFieldValue(field, e.target.value);
                     }}
-                    className={error ? classes.warningStyles : null}
                 />
             )
         case 'select':
@@ -58,6 +51,7 @@ const InputElements = ({ field, setFieldValue , error}) => {
                 <FormControl variant="outlined">
                     <InputLabel>{field.label}</InputLabel>
                     <MuiSelect
+                        error={error}
                         label={field.label}
                         onChange={(e) => {
                             setFieldValue(field, e.target.value);
@@ -77,6 +71,7 @@ const InputElements = ({ field, setFieldValue , error}) => {
                 <BasicDatePicker
                     field={field}
                     onchange={setFieldValue}
+                    error={error}
                 />
             )
         case 'checkbox':
