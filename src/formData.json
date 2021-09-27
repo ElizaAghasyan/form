@@ -2,6 +2,7 @@
   "formTitle": "Form",
   "submitText": "Submit",
   "endpoint": "https://netangels.net/login",
+  "siteKey": "6LdwnD8cAAAAAIrYJcm5nRg1JQDRzDI6qL3OOEz5",
   "formRows": [
     {
       "formGroupTitle": "Group 1",
@@ -81,18 +82,6 @@
           "field": "checked",
           "label": "Confirm",
           "type": "checkbox"
-        }
-      ]
-    },
-    {
-      "formGroupTitle": "Google recaptcha",
-      "fields": [
-        {
-          "field": "recaptcha",
-          "siteKey": "6LdwnD8cAAAAAIrYJcm5nRg1JQDRzDI6qL3OOEz5",
-          "type": "recaptcha",
-          "label": "recaptcha",
-          "required": true
         }
       ]
     }

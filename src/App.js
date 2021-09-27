@@ -2,6 +2,7 @@ import {useState} from "react";
 import FormData from './formData.json';
 import {Button as MuiButton, makeStyles} from '@material-ui/core';
 import InputElements from "./components/InputElements";
+import {GoogleReCaptcha, GoogleReCaptchaProvider} from 'react-google-recaptcha-v3';
 import './App.css';
 
 const useStyles = makeStyles(() => ({
@@ -15,7 +16,7 @@ const useStyles = makeStyles(() => ({
         },
         '& .MuiInputLabel-outlined': {
             fontSize: '15px',
-            margin: '-6px 0'
+            margin: '-8px 0'
         }
     },
     btnLabel: {
@@ -26,6 +27,7 @@ const useStyles = makeStyles(() => ({
 const App = () => {
     const [formData] = useState(FormData);
     const initialFormValue = {};
+    let recaptcha;
     formData.formRows.forEach((inputs) => {
         inputs.fields.forEach((input) => {
             initialFormValue[input.field] = '';
@@ -50,7 +52,7 @@ const App = () => {
                     if (!errorRequired.includes(input.field)) {
                         errorRequired.push(input.field);
                     }
-                } else if(errorRequired.includes(input.field)) {
+                } else if (errorRequired.includes(input.field)) {
                     errorRequired = errorRequired.filter(item => item !== input.field)
                 }
             })
@@ -61,6 +63,8 @@ const App = () => {
             return
         }
 
+        formValue.recaptcha = recaptcha;
+        console.log(formValue);
         fetch(formData.endpoint, {
             method: 'POST',
             headers: {
@@ -69,49 +73,53 @@ const App = () => {
             body: JSON.stringify(formValue),
             credentials: 'include',
         }).then(() => {
-            // setFormValue({});
-        })
-        //     .catch(() => {
-        //     setLoading(false);
-        // });
+            setFormValue({});
+        }).catch((error) => {
+            console.log(error);
+        });
     }
 
     return (
-        <div className="wrapper">
-            <div className='form-wrapper'>
-                <h2 className='form-title'>{formData.formTitle}</h2>
-                <form className={classes.inputsRoot}>
-                    {formData.formRows.map((row, i) => (
-                        <div key={i} className="form-group">
-                            <h4>
-                                {row.formGroupTitle}
-                            </h4>
-                            <div className="form-content">
-                                {row.fields.map((field, j) => <InputElements
-                                        formValue={formValue}
-                                        setFieldValue={setFieldValue}
-                                        key={j}
-                                        field={field}
-                                        error={error.includes(field.field)}
-                                    />
-                                )}
+        <GoogleReCaptchaProvider reCaptchaKey={formData.siteKey}>
+            <div className="wrapper">
+                <div className='form-wrapper'>
+                    <h2 className='form-title'>{formData.formTitle}</h2>
+                    <form className={classes.inputsRoot}>
+                        {formData.formRows.map((row, i) => (
+                            <div key={i} className="form-group">
+                                <h4>
+                                    {row.formGroupTitle}
+                                </h4>
+                                <div className="form-content">
+                                    {row.fields.map((field, j) => <InputElements
+                                            formValue={formValue}
+                                            setFieldValue={setFieldValue}
+                                            key={j}
+                                            field={field}
+                                            error={error.includes(field.field)}
+                                        />
+                                    )}
+                                </div>
                             </div>
+                        ))}
+                        <div className='btn-wrapper'>
+                            <MuiButton
+                                variant="contained"
+                                size="large"
+                                color="primary"
+                                classes={{label: classes.btnLabel}}
+                                onClick={submitForm}
+                            >
+                                {formData.submitText}
+                            </MuiButton>
                         </div>
-                    ))}
-                    <div className='btn-wrapper'>
-                        <MuiButton
-                            variant="contained"
-                            size="large"
-                            color="primary"
-                            classes={{label: classes.btnLabel}}
-                            onClick={submitForm}
-                        >
-                            {formData.submitText}
-                        </MuiButton>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
+            <GoogleReCaptcha onVerify={(token) => {
+                recaptcha = token
+            }}/>
+        </GoogleReCaptchaProvider>
     );
 }
 

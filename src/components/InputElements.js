@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import Checkbox from "@mui/material/Checkbox";
 import BasicDatePicker from "./Date";
-import Reaptcha from "reaptcha";
+// import Reaptcha from "reaptcha";
 
 const useStyles = makeStyles(() => ({
     radio: {
@@ -117,13 +117,7 @@ const InputElements = ({field, setFieldValue, error, formValue}) => {
                     </MuiRadioGroup>
                 </FormControl>
             )
-        case 'recaptcha':
-            return (
-                <Reaptcha sitekey={field.siteKey} onVerify={(value) => {
-                    setFieldValue(field, value);
-                }}
-                />
-            )
+
         default:
             return null;
     }
