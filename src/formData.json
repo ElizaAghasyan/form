@@ -1,7 +1,7 @@
 {
   "formTitle": "Form",
   "submitText": "Submit",
-  "endpoint": "baseUrl/endPoint",
+  "endpoint": "https://netangels.net/login",
   "formRows": [
     {
       "formGroupTitle": "Group 1",
