@@ -89,7 +89,7 @@
       "fields": [
         {
           "field": "recaptcha",
-          "siteKey": "6LdjWZAcAAAAAGQK-5UDqfgr2V3GxQC8kw1LDQfk",
+          "siteKey": "6LdwnD8cAAAAAIrYJcm5nRg1JQDRzDI6qL3OOEz5",
           "type": "recaptcha",
           "label": "recaptcha",
           "required": true
