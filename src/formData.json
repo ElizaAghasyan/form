@@ -1,6 +1,7 @@
 {
   "formTitle": "Form",
   "submitText": "Submit",
+  "redirectUrl": "https://www.google.com/",
   "endpoint": "https://netangels.net/login",
   "siteKey": "6LdwnD8cAAAAAIrYJcm5nRg1JQDRzDI6qL3OOEz5",
   "formRows": [
@@ -12,26 +13,30 @@
           "label": "Name",
           "type": "text",
           "required": true,
-          "validationPattern": "^[a-zA-Z\\-]+$"
+          "validationPattern": "^[a-zA-Z\\-]+$",
+          "errorText": "Please enter a valid name!"
         },
         {
           "field": "email",
           "label": "Email",
           "type": "text",
           "required": true,
-          "validationPattern": "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"
+          "validationPattern": "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$",
+          "errorText": "Please enter a valid email address!"
         },
         {
           "field": "phone",
-          "label": "phone number",
+          "label": "Phone Number",
           "type": "number",
-          "required": true
+          "required": true,
+          "errorText": "Please enter a valid phone number!"
         },
         {
-          "field": "select",
+          "field": "job",
           "type": "select",
-          "label": "Select",
+          "label": "Job",
           "required": true,
+          "errorText": "Job field is required!",
           "options": [
             {
               "title": "Full-Time",
@@ -51,24 +56,25 @@
           ]
         },
         {
-          "field": "date",
+          "field": "birthday",
           "type": "datePicker",
           "label": "Birthday",
-          "required": true
+          "required": true,
+          "errorText": "Birthday field is required!"
         },
         {
-          "field": "radio",
+          "field": "developerType",
           "type": "radio",
           "required": true,
           "items": [
             {
               "label": "Front-End",
-              "value": "Front-End",
+              "value": "FrontEnd",
               "id": 1
             },
             {
               "label": "Back-End",
-              "value": "Back-End",
+              "value": "BackEnd",
               "id": 2
             },
             {
@@ -79,8 +85,8 @@
           ]
         },
         {
-          "field": "checked",
-          "label": "Confirm",
+          "field": "termsAccepted",
+          "label": "Terms and conditions",
           "type": "checkbox"
         }
       ]

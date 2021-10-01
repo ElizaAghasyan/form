@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import FormData from './formData.json';
 import {Button as MuiButton, makeStyles} from '@material-ui/core';
 import InputElements from "./components/InputElements";
@@ -28,14 +28,27 @@ const App = () => {
     const [formData] = useState(FormData);
     const initialFormValue = {};
     let recaptcha;
+    useEffect(() => {
+        document.title = formData.formTitle
+    }, [formData.formTitle]);
+
     formData.formRows.forEach((inputs) => {
         inputs.fields.forEach((input) => {
-            initialFormValue[input.field] = '';
+            switch (input.type) {
+                case 'radio':
+                    initialFormValue[input.field] = input.items[0].value;
+                    break
+                case 'checkbox':
+                    initialFormValue[input.field] = false
+                    break
+                default:
+                    initialFormValue[input.field] = '';
+            }
         })
     })
+
     const [formValue, setFormValue] = useState(initialFormValue);
-    const [error, setError] = useState([]);
-    // const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(new Set());
     const classes = useStyles();
 
     const setFieldValue = (field, value) => {
@@ -43,37 +56,48 @@ const App = () => {
     }
 
     const submitForm = () => {
-        let errorRequired = error;
+        let validationArr = new Set(error);
+        const datePickers = [];
         formData.formRows.forEach((inputs) => {
             inputs.fields.forEach(input => {
+                if (input.type === 'datePicker') {
+                    datePickers.push(input.field);
+                }
+
                 const regExp = input.validationPattern && new RegExp(input.validationPattern);
                 const value = formValue[input.field];
+
                 if ((input.required && !value) || (regExp && !regExp.test(value))) {
-                    if (!errorRequired.includes(input.field)) {
-                        errorRequired.push(input.field);
+                    if (!validationArr.has(input)) {
+                        validationArr.add(input);
                     }
-                } else if (errorRequired.includes(input.field)) {
-                    errorRequired = errorRequired.filter(item => item !== input.field)
+                } else if (validationArr.has(input)) {
+                    validationArr.delete(input);
                 }
             })
         })
 
-        setError([...errorRequired]);
-        if (errorRequired.length) {
+        setError(validationArr);
+        if (validationArr.size) {
             return
         }
 
-        formValue.recaptcha = recaptcha;
-        console.log(formValue);
+        const valueToSubmit = {...formValue}
+        datePickers.forEach((field) => {
+            valueToSubmit[field] = valueToSubmit[field].toLocaleDateString('en-ZA').replaceAll('/','')
+        })
+
+        valueToSubmit.recaptcha = recaptcha;
+
         fetch(formData.endpoint, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
             },
-            body: JSON.stringify(formValue),
+            body: JSON.stringify(valueToSubmit),
             credentials: 'include',
         }).then(() => {
-            setFormValue({});
+            window.location.href = formData.redirect;
         }).catch((error) => {
             console.log(error);
         });
@@ -87,16 +111,14 @@ const App = () => {
                     <form className={classes.inputsRoot}>
                         {formData.formRows.map((row, i) => (
                             <div key={i} className="form-group">
-                                <h4>
-                                    {row.formGroupTitle}
-                                </h4>
+                                <h4>{row.formGroupTitle}</h4>
                                 <div className="form-content">
                                     {row.fields.map((field, j) => <InputElements
                                             formValue={formValue}
                                             setFieldValue={setFieldValue}
                                             key={j}
                                             field={field}
-                                            error={error.includes(field.field)}
+                                            error={error.has(field)}
                                         />
                                     )}
                                 </div>
@@ -112,6 +134,13 @@ const App = () => {
                             >
                                 {formData.submitText}
                             </MuiButton>
+                        </div>
+                        <div className="warningStyles">
+                            {Array.from(error).map((field, i) => {
+                                return <div key={i}>
+                                    <span>{field.label}</span>: <span>{field.errorText}</span>
+                                </div>
+                            })}
                         </div>
                     </form>
                 </div>

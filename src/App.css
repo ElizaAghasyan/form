@@ -1,6 +1,6 @@
 .wrapper {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: auto;
     padding: 30px;
     box-sizing: border-box;
     display: flex;
@@ -32,14 +32,50 @@
 .form-group h4 {
     margin: 7px 0;
     padding: 0 10px;
+    color: #3f51b5;
 }
 
 .form-group .form-content {
     padding: 0 10px;
 }
 
+h2.form-title {
+    color: #2d2d2d;
+    text-align: center;
+    /*margin: 0;*/
+}
 
-h2 {
-    color: #081644;
-    margin: 0;
+.warningStyles {
+    color: red;
+    display: flex;
+    flex-Direction: column;
+    margin: 8px 0;
+}
+
+.warningStyles span {
+    padding: 5px 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+@media screen and (max-width: 480px) {
+    .wrapper {
+        padding: 20px;
+    }
+    .form-wrapper {
+        width: 100%;
+        min-width: 100%;
+        padding: 15px;
+    }
+    .form-group,.form-group .form-content{
+        padding: 0;
+    }
+    .form-group h4 {
+        margin-top: 25px;
+        padding: 0;
+    }
+    span.checkbox {
+        padding: 0 4px;
+    }
 }
