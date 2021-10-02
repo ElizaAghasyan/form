@@ -84,7 +84,7 @@ const App = () => {
 
         const valueToSubmit = {...formValue}
         datePickers.forEach((field) => {
-            valueToSubmit[field] = valueToSubmit[field].toLocaleDateString('en-ZA').replaceAll('/','')
+            valueToSubmit[field] = valueToSubmit[field].toLocaleDateString('en-ZA').replaceAll('/', '');
         })
 
         valueToSubmit.recaptcha = recaptcha;
@@ -97,7 +97,7 @@ const App = () => {
             body: JSON.stringify(valueToSubmit),
             credentials: 'include',
         }).then(() => {
-            window.location.href = formData.redirect;
+            window.location.href = formData.redirectUrl;
         }).catch((error) => {
             console.log(error);
         });
